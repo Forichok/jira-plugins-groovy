@@ -50,3 +50,8 @@ jobs:
         run: |
               yarn install
               yarn build-prod
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: staging
+
