@@ -9,6 +9,13 @@ on:
     branches: [ github-actions ]
   pull_request:
     branches: [ github-actions ]
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Send artifacts to release'     
+        required: true
+        default: false
+# ${{ github.event.inputs.logLevel }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -47,7 +54,7 @@ jobs:
               
       - name: Build atlas package
         run: atlas-package -P production
-
+        if: ${{ github.event.inputs.logLevel }}
       - uses: actions/upload-artifact@master
         with:
           name: package artifacts
