@@ -27,11 +27,14 @@ jobs:
         with:
           java-version: 8
 
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1.4.3
+        
       - name: Run a one-line script
         run: echo Hello, world!
 
       - name: Build atlas package
         run: atlas-package
-
+  
       - name: Build front
         run: yarn build-prod
