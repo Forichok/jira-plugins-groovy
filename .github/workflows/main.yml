@@ -46,6 +46,7 @@ jobs:
         run: atlas-package
   
       - name: Build front
+        working-directory: js
         run: |
               yarn install
               yarn build-prod
