@@ -30,15 +30,6 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v1.4.3
         
-      - name: Set up Atlas SDK
-      - run: |
-          sudo sh -c 'echo "deb https://packages.atlassian.com/debian/atlassian-sdk-deb/ stable contrib" >> /etc/apt/sources.list'
-          wget https://packages.atlassian.com/api/gpg/key/public
-          sudo apt-key add public
-          sudo apt-get update
-          sudo apt-get install atlassian-plugin-sdk
-          atlas-version
-        
       - name: Run a one-line script
         run: echo Hello, world!
 
