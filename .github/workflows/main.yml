@@ -30,7 +30,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v1.4.3
         
-      - name: Build front
+      - name: Download and install atlassian sdk
         run: |
               sudo sh -c 'echo "deb https://packages.atlassian.com/debian/atlassian-sdk-deb/ stable contrib" >> /etc/apt/sources.list'
               wget https://packages.atlassian.com/api/gpg/key/public
@@ -38,18 +38,16 @@ jobs:
               sudo apt-get update
               sudo apt-get install atlassian-plugin-sdk
               atlas-version
-        
-      - name: Run a one-line script
-        run: echo Hello, world!
 
-      - name: Build atlas package
-        run: atlas-package -P production
-  
       - name: Build front
         working-directory: js
         run: |
               yarn install
               yarn build-prod
+              
+      - name: Build atlas package
+        run: atlas-package -P production
+
       - uses: actions/upload-artifact@master
         with:
           name: package artifacts
