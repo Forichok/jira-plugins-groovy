@@ -43,7 +43,7 @@ jobs:
         run: echo Hello, world!
 
       - name: Build atlas package
-        run: atlas-package
+        run: atlas-package -P production
   
       - name: Build front
         working-directory: js
