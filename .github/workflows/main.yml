@@ -38,7 +38,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install atlassian-plugin-sdk
           atlas-version
-          shell: bash
+        shell: bash
         
       - name: Run a one-line script
         run: echo Hello, world!
