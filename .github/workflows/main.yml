@@ -53,5 +53,8 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           name: package artifacts
-          path: target/
+          path: |
+            target/*.jar
+            target/*.obr
+          
 
