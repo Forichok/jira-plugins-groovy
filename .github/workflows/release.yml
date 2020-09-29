@@ -1,4 +1,4 @@
-name: Build release on tag with artifacts
+name: Release on version tag push
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 
@@ -7,13 +7,7 @@ on:
     # Sequence of patterns matched against refs/tags
     tags:
       - '[0-9]+.[0-9]+*' # Push events to matching v*, i.e. 1.0, 20.15.10
-  workflow_dispatch:
-    inputs:
-      pushToRelease:
-        description: 'Send artifacts to release'     
-        required: true
-        default: false
-        
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -68,10 +62,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-#           body: |
-#             Changes in this Release
-#             - First Change
-#             - Second Change
+          # body: changelog
           draft: false
           prerelease: false
           
