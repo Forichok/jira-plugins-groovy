@@ -85,6 +85,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: target/*.jar
-          asset_name: format('{0}{1}', 'mygroovy-', ${{github.ref}})
+#           asset_name: format('{0}{1}', 'mygroovy-', ${{github.ref}})
+          asset_name: test
           tag: ${{ github.ref }}
           overwrite: true
