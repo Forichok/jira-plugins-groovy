@@ -57,11 +57,13 @@ jobs:
               
       - name: Build atlas package
         run: atlas-package -P production
-#         if: ${{ github.event.inputs.logLevel }}
+        
       - uses: actions/upload-artifact@master
         with:
           name: package artifacts
-          path: target/*.jar
+          path: | 
+              target/*.jar
+              target/*.obr
           
       - name: Create Release
         id: create_release
@@ -71,10 +73,10 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
+#           body: |
+#             Changes in this Release
+#             - First Change
+#             - Second Change
           draft: false
           prerelease: false
           
@@ -82,7 +84,9 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/*.jar
+          file: |
+              target/*.jar
+              target/*.obr
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
