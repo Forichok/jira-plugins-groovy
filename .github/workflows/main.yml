@@ -1,25 +1,19 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: Build release on tag with artifacts
 
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the jira8 branch
 
 on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
-      - '[0-9]+.[0-9]+*' # Push events to matching v*, i.e. v1.0, v20.15.10
-#   pull_request:
-#     branches: [ jira8 ]
+      - '[0-9]+.[0-9]+*' # Push events to matching v*, i.e. 1.0, 20.15.10
   workflow_dispatch:
     inputs:
       pushToRelease:
         description: 'Send artifacts to release'     
         required: true
         default: false
-# ${{ github.event.inputs.logLevel }}
-
+        
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -58,6 +52,7 @@ jobs:
       - name: Build atlas package
         run: atlas-package -P production
         
+      - name: upload artifacts
       - uses: actions/upload-artifact@master
         with:
           name: package artifacts
@@ -80,12 +75,20 @@ jobs:
           draft: false
           prerelease: false
           
-      - name: Upload binaries to release
+      - name: Upload jar binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: target/*.jar
-#           asset_name: format('{0}{1}', 'mygroovy-', ${{github.ref}})
-          asset_name: test
           tag: ${{ github.ref }}
           overwrite: true
+          file_glob: true
+          
+      - name: Upload obr binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/*.obr
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
