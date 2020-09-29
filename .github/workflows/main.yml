@@ -88,4 +88,3 @@ jobs:
           asset_name: format('{0}{1}', 'mygroovy-', ${{github.ref}})
           tag: ${{ github.ref }}
           overwrite: true
-          file_glob: true
