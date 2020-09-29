@@ -84,9 +84,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: |
-              target/*.jar
-              target/*.obr
+          file: target/*.jar
+          asset_name: '${{github.ref}}.jar'
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
