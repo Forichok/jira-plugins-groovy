@@ -53,7 +53,7 @@ jobs:
         run: atlas-package -P production
         
       - name: upload artifacts
-      - uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@master
         with:
           name: package artifacts
           path: | 
