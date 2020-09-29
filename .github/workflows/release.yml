@@ -36,12 +36,15 @@ jobs:
           fi
           
       - run: echo '::set-env name=VERSION::${{ github.ref }}'
+        
       - run: echo '::set-env name=VERSION::${{ github.event.inputs.version }}'
         if: ${{ github.event.inputs.version }}
-        
-        
-      - name: Get color
-        run: echo 'The selected color is' $VERSION
+
+      - name: Bump version and push tag
+        uses: mathieudutour/github-tag-action@v4.5
+        with:
+          custom_tag: ${{ env.VERSION }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK 8
         uses: actions/setup-java@v1.4.2
