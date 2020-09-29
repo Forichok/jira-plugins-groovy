@@ -41,9 +41,9 @@ jobs:
               yarn build-prod
               
       - name: Build atlas package
-        run: atlas-package -P production
+        run: atlas-package
         
-      - name: upload artifacts
+      - name: Upload action artifacts
         uses: actions/upload-artifact@master
         with:
           name: package artifacts
