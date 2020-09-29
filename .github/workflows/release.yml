@@ -58,7 +58,7 @@ jobs:
       - name: Build atlas package
         run: atlas-package -P production
         
-      - name: upload artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@master
         with:
           name: package artifacts
